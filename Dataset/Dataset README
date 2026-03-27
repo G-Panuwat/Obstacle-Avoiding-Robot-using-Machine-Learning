@@ -1,0 +1,60 @@
+# 🎮 AI Rover: Data Collection Simulator
+
+## 🎯 Purpose
+
+This script (`Python_robot_simulator.py`) is a custom 2D simulation environment built to generate the training data required by the machine learning models.
+
+Before the robot can autonomously avoid obstacles, it needs to learn from human demonstration. This simulator allows a user to manually drive a virtual robot around a custom obstacle course. As you drive, the system continuously records the robot's sensor readings and your steering decisions, compiling them into the `rover_navigation_dataset.csv` file used in the main ML pipeline.
+
+---
+
+## 🚀 How It Works
+
+- **The Environment** — The simulator generates an 800×600 pixel arena containing various hardcoded obstacles, including outer walls, distinct rooms, and freestanding pillars.
+- **Virtual Sensors (Raycasting)** — The robot is equipped with three simulated LiDAR/distance sensors pointing Left (−45°), Front (0°), and Right (+45°). These sensors cast visible rays (up to 300 pixels) to measure the distance to the nearest obstacle.
+- **Data Logging** — To prevent data bloat and redundant samples, the script only records data every 5 frames, and only when the robot is actively moving forward.
+- **Label Mapping** — Keyboard inputs are mapped directly to the `action` column in the dataset:
+
+| Key Input | `action` Value | Meaning |
+|---|---|---|
+| No steering / forward only | `0` | Moving forward |
+| Left Arrow | `1` | Turning left |
+| Right Arrow | `2` | Turning right |
+
+---
+
+## 🛠️ Setup & Requirements
+
+This simulator relies heavily on **Pygame** for rendering and event handling. Install it via pip:
+```bash
+pip install pygame
+```
+
+> **Note:** `math`, `csv`, and `sys` are built-in Python libraries and do not require manual installation.
+
+---
+
+## 💻 Usage Instructions
+
+### 1. Run the Simulator
+
+Execute the script from your terminal:
+```bash
+python Python_robot_simulator.py
+```
+
+### 2. Drive the Robot
+
+| Key | Action |
+|---|---|
+| `↑` Up Arrow (hold) | Drive forward |
+| `←` Left Arrow | Steer left |
+| `→` Right Arrow | Steer right |
+
+> **Tip:** Try to drive smoothly and safely around the walls. The better your human demonstration, the smarter your AI will be!
+
+### 3. Save the Dataset
+
+- Once you have navigated the course and generated enough scenarios (corners, straightaways, narrow passages), simply **close the Pygame window**.
+- The script will automatically compile your session and output `rover_navigation_dataset.csv` into the same directory.
+- The terminal will print exactly how many data samples were successfully collected.
