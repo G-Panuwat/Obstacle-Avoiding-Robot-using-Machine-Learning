@@ -4,7 +4,7 @@
 
 This repository contains a robust machine learning pipeline designed to be embedded in a robot for real-time obstacle avoidance. The primary goal is to allow a robot to safely and autonomously navigate its environment by detecting and avoiding physical barriers like walls.
 
-Beyond basic navigation, this system is highly suitable for integration into more complex robotics projects — such as an autonomous AI companion rover — by providing the foundational spatial awareness needed to maneuver smoothly through dynamic spaces.
+Beyond basic navigation, this system is highly suitable for integration into more complex robotics projects such as an autonomous AI companion rover by providing the foundational spatial awareness needed to maneuver smoothly through dynamic spaces.
 
 ---
 
